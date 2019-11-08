@@ -19,6 +19,26 @@ class Form extends Component {
         console.log({ [name]: value })
     }
 
+    handleFormSubmit = event => {
+        event.preventDefault();
+        console.log("Submit has been clicked!")
+
+        const { name, phoneNumber, email, zip } = this.state;
+
+        this.setState({ 
+            name: name, 
+            phoneNumber: phoneNumber, 
+            email: email, 
+            zip: zip
+        });
+
+        console.log("Name: " + name);
+        console.log("Number: " + phoneNumber);
+        console.log("Email: " + email);
+        console.log("Zip: " + zip);
+
+    }
+
     render() {
         return (
             <div>
@@ -62,13 +82,13 @@ class Form extends Component {
                   <input
                     type="text"
                     className="form-control"
-                    id="zipCode"
-                    name="zipCode"
+                    id="zip"
+                    name="zip"
                     placeholder="19382"
                     onChange={this.handleInputChange}
                   />
                 </div>
-                <button type="submit" className="btn btn-primary">
+                <button type="submit" className="btn btn-primary" onClick={this.handleFormSubmit}>
                   Submit
                 </button>
               </form>
