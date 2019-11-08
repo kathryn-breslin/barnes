@@ -19,6 +19,8 @@ class Form extends Component {
         console.log({ [name]: value })
     }
 
+    //form to capture user input on submit
+    //NEXT: add validation for each field
     handleFormSubmit = event => {
         event.preventDefault();
         console.log("Submit has been clicked!")
@@ -37,9 +39,26 @@ class Form extends Component {
         console.log("Email: " + email);
         console.log("Zip: " + zip);
 
+        if (!name.length) {
+            console.log("Please add your name")
+        }
+        if ( phoneNumber.length < 7 && isNaN) {
+            console.log("Please enter a valid number.")
+        }
+        if (/^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[A-Za-z]+$/.test(email)) {
+            console.log("Working email")
+        }
+        else {
+            console.log("Please add a valid email.")
+        }
+        if (zip.length < 5 && isNaN) {
+            console.log("Please add a valid zip.")
+        }
     }
 
+
     render() {
+
         return (
             <div>
               <form>
@@ -89,7 +108,7 @@ class Form extends Component {
                   />
                 </div>
                 <button type="submit" className="btn btn-primary" onClick={this.handleFormSubmit}>
-                  Submit
+                  Continue
                 </button>
               </form>
             </div>
