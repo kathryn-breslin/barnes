@@ -1,18 +1,26 @@
 import React from "react";
 import "./App.css";
+import { BrowserRouter as Router, Route } from "react-router-dom"
+import Confirmation from "../src/pages/Confirmation/Confirmation"
 import Form from "../src/components/Form/Form";
 
 function App() {
   return (
-    <div className="App">
-      <div className="container">
-        <div className="row">
-          <div className="col-12">
-            <Form />
-          </div>
-        </div>
+    <Router>
+      <div>
+        <Route exact path="/" component={Form}/>
+        <Route exact path="/confirm" component={Confirmation}/>
       </div>
-    </div>
+    </Router>
+    // <div className="App">
+    //   <div className="container">
+    //     <div className="row">
+    //       <div className="col-12">
+    //         <Form />
+    //       </div>
+    //     </div>
+    //   </div>
+    // </div>
   );
 }
 

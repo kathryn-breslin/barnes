@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import "./Hero.css";
 import json from "../../utils/json";
 import Card from "../Card/Card";
+import { Link } from "react-router-dom";
 
 const newHeros = [
   {
@@ -30,62 +31,78 @@ const newHeros = [
   }
 ];
 
+var checkout = 0;
+
 class Counter extends Component {
+  state = {
+    total: 0,
+    topTotal: 0
+  };
 
-    state = {
-        total: 0
-      };
+  increaseValue = () => {
+    this.setState(prevState => {
+      if (prevState.total < 10) {
+        return {
+          total: prevState.total + 1
+        };
+      } else {
+        return null;
+      }
+    });
+    this.calculateTotal();
+  };
 
-    increaseValue = () => {
-        this.setState( prevState => {
-            if (prevState.total < 10 ) {
-                return {
-                    total: prevState.total + 1
-                }
-            }
-            else {
-                return null;
-            }
-        })
-    }
-  
-    decreaseValue = () => {
-        this.setState(prevState =>{
-            if (prevState.total > 0) {
-              return {
-                  total: prevState.total - 1
-              }
-            }
-            else {
-                return null;
-            }
-        })
-    }
-  
-    handleClick = () => {
-        this.setState({ 
-          showNumber: !this.state.showNumber
-        })
-    }
-  
-    handleEventChange = (event) => {
-        this.setState({ total: event.target.value })
-    }
+  decreaseValue = () => {
+    this.setState(prevState => {
+      if (prevState.total > 0) {
+        return {
+          total: prevState.total - 1
+        };
+      } else {
+        return null;
+      }
+    });
+    this.calculateTotal();
+  };
 
-    render () {
-        return (
-            <Card
-                total={this.state.total}
-                increaseValue={this.increaseValue}
-                decreaseValue={this.decreaseValue}
-            />
-        //     <div className="col-auto">
-        //     <button onClick={() => {this.increaseValue(index)}}className="btn">+</button>
-        //     <input value={this.state.total} onChange={() => this.handleEventChange(index)}/>
-        //     <button onClick={() => {this.decreaseValue(index)}}className="btn">-</button>
-        //   </div>
-        )
-    }
+  calculateTotal() {
+    // checkout += this.state.total
+    //  console.log("Checkout: " + this.state.total)
+    const { total, topTotal } = this.state;
+    let currentTotal = 0;
+    currentTotal += total;
+    // this.setState({ topTotal: currentTotal})
+    console.log("Current Total: " + currentTotal);
+  }
+
+  handleClick = () => {
+    this.setState({
+      showNumber: !this.state.showNumber
+    });
+  };
+
+  handleEventChange = event => {
+    this.setState({ total: event.target.value });
+  };
+
+  render() {
+    return (
+      <div>
+        <div>Total: {this.calculateTotal()}</div>
+
+        <Card
+          total={this.state.total}
+          increaseValue={this.increaseValue}
+          decreaseValue={this.decreaseValue}
+        />
+        {/* //     <div className="col-auto">
+      //     <button onClick={() => {this.increaseValue(index)}}className="btn">+</button>
+      //     <input value={this.state.total} onChange={() => this.handleEventChange(index)}/>
+      //     <button onClick={() => {this.decreaseValue(index)}}className="btn">-</button>
+      //   </div> */}
+      </div>
+    );
+  }
 }
 
 class HeroService extends Component {
@@ -94,7 +111,7 @@ class HeroService extends Component {
     squadName: "",
     homeTown: "",
     secretBase: "",
-    formed: "", 
+    formed: ""
   };
 
   componentDidMount() {
@@ -113,24 +130,27 @@ class HeroService extends Component {
     });
   }
 
+  handleFormSubmit = event => {
+    event.preventDefault();
+    console.log("Submit!");
+  };
+
   allHeros() {
     const { heros } = this.state;
-
-    console.log("Heros: " + heros);
+    // console.log("Heros: " + heros);
 
     const herosList = heros.map((item, index) => {
       return (
         <div className="row">
           <div className="col-12">
-                <div className="card" key={item}>
-
-                  <div className="card-body">
-                    {item.name + "/" + item.secretIdentity} ||
-                    {"Super Powers: " + item.powers}
-                  </div>
-                  <Counter/>
-
-                </div>
+            <div className="card" key={item}>
+              <div className="card-body">
+                {item.name + "/" + item.secretIdentity} ||{" "}
+                {"Super Powers: " + item.powers}
+                {console.log("Index: " + index)}
+              </div>
+              <Counter />
+            </div>
           </div>
         </div>
       );
@@ -152,7 +172,13 @@ class HeroService extends Component {
         <p>{"Secret Base: " + secretBase}</p>
         <p>{"Formed: " + formed}</p>
 
-        <div id="renderGroup">{this.allHeros()}</div>
+        <div id="renderGroup">
+          {this.allHeros()}
+          <button
+            className="btn btn-outline-light my-2 my-sm-0">
+            <Link to="/confirm"> Continue</Link>
+          </button>
+        </div>
       </div>
     );
   }

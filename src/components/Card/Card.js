@@ -1,6 +1,10 @@
 import React from "react";
 
-function Card(props) {
+const Card = (props) => {
+    
+    // let total = 0
+    //     total += props.total;
+    
   return (
     <div className="card">
       <div className="card-body"></div>
@@ -13,9 +17,10 @@ function Card(props) {
           +
         </button>
       </div>
-      {console.log("Total: " + props.total)}
+      {/* {console.log("Total: " + total)} */}
     </div>
   );
 }
+
 
 export default Card;
