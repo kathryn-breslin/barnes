@@ -47,20 +47,30 @@ class Form extends Component {
             console.log("Please add your name");
             this.setState({ nameError: "Please add your name. Ex: 'Jane Doe'"})
         }
+        else {
+            this.setState({ nameError: ""})
+        }
         if ( phoneNumber.length < 7 && isNaN) {
             console.log("Please enter a valid number.");
             this.setState({ phoneError: "Please enter a valid number. Ex: 6101231234"})
         }
+        else {
+            this.setState({ phoneError: ""})
+        }
         if (/^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[A-Za-z]+$/.test(email)) {
             console.log("Working email")
+            this.setState({ emailError: ""})
         }
-        else if (!email.length){
+        else {
             console.log("Please add a valid email.")
-            this.setState({ email: "Please add a valid email. Ex: email@email.com"})
+            this.setState({ emailError: "Please add a valid email. Ex: email@email.com"})
         }
         if (zip.length < 5 && isNaN) {
             console.log("Please add a valid zip.");
-            this.setState({ zip: "Please add valid zipcode. Ex: 19234"})
+            this.setState({ zipError: "Please add valid zipcode. Ex: 19234"})
+        }
+        else {
+            this.setState({ zipError: "" })
         }
     }
 
