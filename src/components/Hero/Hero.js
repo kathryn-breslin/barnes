@@ -4,30 +4,41 @@ import json from "../../utils/json";
 class HeroService extends Component {
 
     state = {
-        heros: {
-            squadName: ""
-        }
+        heros: [], 
+        squadName: "", 
+        homeTown: "", 
+        secretBase: "", 
+        formed: ""
+    }
+
+    componentDidMount() {
+        this.squadInfo();
     }
 
     squadInfo () {
         json.heros().then(res => {
-            // console.log("This is the object:" + JSON.stringify(res));
-            console.log( "Squad Name: " + res.data);
-            this.setState({ heros: res.data })
+            this.setState({ 
+                squadName: res.data.squadName, 
+                homeTown: res.data.homeTown, 
+                secretBase: res.data.secretBase, 
+                formed: res.data.formed
+            })
         })
     }
     
     render () {
 
-        const { heros } = this.state; 
-
+        const { squadName, homeTown, secretBase, formed } = this.state; 
+        console.log("State: " + squadName)
         return (
             <div>
-                <h1>Hero!</h1>
-                {this.squadInfo()}
+                <h1>Hero Section!</h1>
                 
 
-                {"Squad Name: " + heros.squadName}
+                <h1>{"Squad Name: " + squadName}</h1>
+                <h2>{"Hometown:" + homeTown}</h2>
+                <p>{"Secret Base: " + secretBase}</p>
+                <p>{"Formed: " + formed}</p>
             </div>
         )
     }
