@@ -8,7 +8,11 @@ class Form extends Component {
         name: "", 
         phoneNumber: "", 
         email: "", 
-        zip: ""
+        zip: "", 
+        nameError: "", 
+        phoneError: "", 
+        emailError: "", 
+        zipError: ""
     };
 
     //function to handle the event change when user types
@@ -40,19 +44,23 @@ class Form extends Component {
         console.log("Zip: " + zip);
 
         if (!name.length) {
-            console.log("Please add your name")
+            console.log("Please add your name");
+            this.setState({ nameError: "Please add your name. Ex: 'Jane Doe'"})
         }
         if ( phoneNumber.length < 7 && isNaN) {
-            console.log("Please enter a valid number.")
+            console.log("Please enter a valid number.");
+            this.setState({ phoneError: "Please enter a valid number. Ex: 6101231234"})
         }
         if (/^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[A-Za-z]+$/.test(email)) {
             console.log("Working email")
         }
-        else {
+        else if (!email.length){
             console.log("Please add a valid email.")
+            this.setState({ email: "Please add a valid email. Ex: email@email.com"})
         }
         if (zip.length < 5 && isNaN) {
-            console.log("Please add a valid zip.")
+            console.log("Please add a valid zip.");
+            this.setState({ zip: "Please add valid zipcode. Ex: 19234"})
         }
     }
 
@@ -66,46 +74,50 @@ class Form extends Component {
                   <label htmlFor="name">Name</label>
                   <input
                     type="text"
-                    className="form-control"
+                    className={`form-control ${this.state.nameError ? 'is-invalid': ''}`}
                     id="name"
                     name="name"
                     placeholder="name"
                     onChange={this.handleInputChange}
                   />
+                <div className="invalid">{this.state.nameError}</div>
                 </div>
                 <div className="form-group">
                   <label htmlFor="phone">Phone Number</label>
                   <input
                     type="text"
-                    className="form-control"
+                    className={`form-control ${this.state.phoneError ? 'is-invalid': ''}`}
                     id="phoneNumber"
                     name="phoneNumber"
                     placeholder="(610) 898-3456"
                     onChange={this.handleInputChange}
                   />
+                  <div className="invalid">{this.state.phoneError}</div>
                 </div>
                 <div className="form-group">
                   <label htmlFor="email">Email address</label>
                   <input
                     type="email"
-                    className="form-control"
+                    className={`form-control ${this.state.emailError ? 'is-invalid': ''}`}
                     id="email"
                     name="email"
                     aria-describedby="email"
                     placeholder="Enter email"
                     onChange={this.handleInputChange}
                   />
+                  <div className="invalid">{this.state.emailError}</div>
                 </div>
                 <div className="form-group">
                   <label htmlFor="zip">Zip Code</label>
                   <input
                     type="text"
-                    className="form-control"
+                    className={`form-control ${this.state.zipError ? 'is-invalid': ''}`}
                     id="zip"
                     name="zip"
                     placeholder="19382"
                     onChange={this.handleInputChange}
                   />
+                <div className="invalid">{this.state.zipError}</div>
                 </div>
                 <button type="submit" className="btn btn-primary" onClick={this.handleFormSubmit}>
                   Continue
