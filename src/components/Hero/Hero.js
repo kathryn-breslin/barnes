@@ -76,7 +76,7 @@ class HeroService extends Component {
           return (
               <div className="row">
                   <li key={item}>
-                      <p>{item.name}</p>
+                        <p>{item.name + "/" + item.secretIdentity} || {"Super Powers: " + item.powers}</p>
                   </li>
               </div>
           )
