@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import Hero from "../Hero/Hero";
+import HeroService from "../Hero/Hero";
 // import { Button, Collapse } from "react-bootstrap";
 import "./Form.css";
 
@@ -177,7 +177,7 @@ class Form extends Component {
           </form>
         {/* </Collapse> */}
 
-        {this.state.formOpen ? <Hero/> : null}
+        {this.state.formOpen ? <HeroService/> : null}
       </div>
     );
   }
