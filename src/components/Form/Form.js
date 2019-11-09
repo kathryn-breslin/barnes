@@ -1,4 +1,7 @@
 import React, { Component } from "react";
+import Hero from "../Hero/Hero";
+// import { Button, Collapse } from "react-bootstrap";
+import "./Form.css";
 
 class Form extends Component {
   //Set the state for user input
@@ -11,7 +14,8 @@ class Form extends Component {
     nameError: "",
     phoneError: "",
     emailError: "",
-    zipError: ""
+    zipError: "",
+    formOpen: false
   };
 
   //function to handle the event change when user types
@@ -51,10 +55,15 @@ class Form extends Component {
     console.log("Email: " + email);
     console.log("Zip: " + zip);
 
-    if ((nameError === "") && (phoneError === "") && (emailError === "") && (zipError === "")) {
-      this.validated();
-    } 
-    else {
+    if (
+      nameError === "" &&
+      phoneError === "" &&
+      emailError === "" &&
+      zipError === ""
+    ) {
+    // this.validated();
+      this.setState({ formOpen: true});
+    } else {
       if (!name.length) {
         console.log("Please add your name");
         this.setState({ nameError: "Please add your name. Ex: 'Jane Doe'" });
@@ -88,79 +97,87 @@ class Form extends Component {
   };
 
   //Function to hide form on successful submittion of the form
-  validated = () => {
-    console.log("Form has been validated! Time to hide the form.");
-  };
+    // validated = () => {
+    //   console.log("Form has been validated! Time to hide the form.");
+    //   // this.setState({ formOpen: false})
+    // //   console.log(this.state.formOpen)
+
+    // };
 
   render() {
     return (
       <div>
-        <form>
-          <div className="form-group">
-            <label htmlFor="name">Name</label>
-            <input
-              type="text"
-              className={`form-control ${
-                this.state.nameError ? "is-invalid" : ""
-              }`}
-              id="name"
-              name="name"
-              placeholder="name"
-              onChange={this.handleInputChange}
-            />
-            <div className="invalid">{this.state.nameError}</div>
-          </div>
-          <div className="form-group">
-            <label htmlFor="phone">Phone Number</label>
-            <input
-              type="text"
-              className={`form-control ${
-                this.state.phoneError ? "is-invalid" : ""
-              }`}
-              id="phoneNumber"
-              name="phoneNumber"
-              placeholder="(610) 898-3456"
-              onChange={this.handleInputChange}
-            />
-            <div className="invalid">{this.state.phoneError}</div>
-          </div>
-          <div className="form-group">
-            <label htmlFor="email">Email address</label>
-            <input
-              type="email"
-              className={`form-control ${
-                this.state.emailError ? "is-invalid" : ""
-              }`}
-              id="email"
-              name="email"
-              aria-describedby="email"
-              placeholder="Enter email"
-              onChange={this.handleInputChange}
-            />
-            <div className="invalid">{this.state.emailError}</div>
-          </div>
-          <div className="form-group">
-            <label htmlFor="zip">Zip Code</label>
-            <input
-              type="text"
-              className={`form-control ${
-                this.state.zipError ? "is-invalid" : ""
-              }`}
-              id="zip"
-              name="zip"
-              placeholder="19382"
-              onChange={this.handleInputChange}
-            />
-            <div className="invalid">{this.state.zipError}</div>
-          </div>
-          <button
-            type="submit"
-            className="btn btn-primary"
-            onClick={this.handleFormSubmit}
-          >
-            Continue
-          </button>
-        </form>
+
+        {/* <Collapse> */}
+          <form>
+            <div className="form-group">
+              <label htmlFor="name">Name</label>
+              <input
+                type="text"
+                className={`form-control ${
+                  this.state.nameError ? "is-invalid" : ""
+                }`}
+                id="name"
+                name="name"
+                placeholder="name"
+                onChange={this.handleInputChange}
+              />
+              <div className="invalid">{this.state.nameError}</div>
+            </div>
+            <div className="form-group">
+              <label htmlFor="phone">Phone Number</label>
+              <input
+                type="text"
+                className={`form-control ${
+                  this.state.phoneError ? "is-invalid" : ""
+                }`}
+                id="phoneNumber"
+                name="phoneNumber"
+                placeholder="(610) 898-3456"
+                onChange={this.handleInputChange}
+              />
+              <div className="invalid">{this.state.phoneError}</div>
+            </div>
+            <div className="form-group">
+              <label htmlFor="email">Email address</label>
+              <input
+                type="email"
+                className={`form-control ${
+                  this.state.emailError ? "is-invalid" : ""
+                }`}
+                id="email"
+                name="email"
+                aria-describedby="email"
+                placeholder="Enter email"
+                onChange={this.handleInputChange}
+              />
+              <div className="invalid">{this.state.emailError}</div>
+            </div>
+            <div className="form-group">
+              <label htmlFor="zip">Zip Code</label>
+              <input
+                type="text"
+                className={`form-control ${
+                  this.state.zipError ? "is-invalid" : ""
+                }`}
+                id="zip"
+                name="zip"
+                placeholder="19382"
+                onChange={this.handleInputChange}
+              />
+              <div className="invalid">{this.state.zipError}</div>
+            </div>
+            <button
+              type="submit"
+              className="btn btn-primary"
+              onClick={this.handleFormSubmit}
+            >
+              Continue
+            </button>
+          </form>
+        {/* </Collapse> */}
+
+        {this.state.formOpen ? <Hero/> : null}
       </div>
     );
   }
