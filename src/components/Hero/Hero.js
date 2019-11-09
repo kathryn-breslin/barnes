@@ -1,47 +1,92 @@
 import React, { Component } from "react";
+import "./Hero.css";
 import json from "../../utils/json";
+import Card from "../Card/Card";
 
 const newHeros = [
-{
-    name: "Melinda Gates", 
-    age: "55", 
-    secretIdentity: "Bill & Melinda Gates Foundation", 
-    powers: [
-        "Kindness",
-        "Empathy", 
-        "Influence" 
-    ]
-}, 
-{
-    name: "Warren Buffet", 
-    age: "89", 
-    secretIdentity: "Berkshire Hathaway", 
-    powers: [
-        "Patience",
-        "Dedication", 
-        "Honesty" 
-    ]
-}, 
-{
-    name: "Elon Musk", 
-    age: "48", 
-    secretIdentity: "SpaceX", 
-    powers: [
-        "Productivity",
-        "Creativity", 
-        "Risk-tolerant" 
-    ]
-}, 
-{
-    name: "Mark Zuckerberg", 
-    age: "35", 
-    secretIdentity: "Facebook", 
-    powers: [
-        "Innovation",
-        "Assertiveness", 
-        "Problem-solving" 
-    ]
-}];
+  {
+    name: "Melinda Gates",
+    age: "55",
+    secretIdentity: "Bill & Melinda Gates Foundation",
+    powers: ["Kindness", "Empathy", "Influence"]
+  },
+  {
+    name: "Warren Buffet",
+    age: "89",
+    secretIdentity: "Berkshire Hathaway",
+    powers: ["Patience", "Dedication", "Honesty"]
+  },
+  {
+    name: "Elon Musk",
+    age: "48",
+    secretIdentity: "SpaceX",
+    powers: ["Productivity", "Creativity", "Risk-tolerant"]
+  },
+  {
+    name: "Mark Zuckerberg",
+    age: "35",
+    secretIdentity: "Facebook",
+    powers: ["Innovation", "Assertiveness", "Problem-solving"]
+  }
+];
+
+class Counter extends Component {
+
+    state = {
+        total: 0
+      };
+
+    increaseValue = () => {
+        this.setState( prevState => {
+            if (prevState.total < 10 ) {
+                return {
+                    total: prevState.total + 1
+                }
+            }
+            else {
+                return null;
+            }
+        })
+    }
+  
+    decreaseValue = () => {
+        this.setState(prevState =>{
+            if (prevState.total > 0) {
+              return {
+                  total: prevState.total - 1
+              }
+            }
+            else {
+                return null;
+            }
+        })
+    }
+  
+    handleClick = () => {
+        this.setState({ 
+          showNumber: !this.state.showNumber
+        })
+    }
+  
+    handleEventChange = (event) => {
+        this.setState({ total: event.target.value })
+    }
+
+    render () {
+        return (
+            <Card
+                total={this.state.total}
+                increaseValue={this.increaseValue}
+                decreaseValue={this.decreaseValue}
+            />
+        //     <div className="col-auto">
+        //     <button onClick={() => {this.increaseValue(index)}}className="btn">+</button>
+        //     <input value={this.state.total} onChange={() => this.handleEventChange(index)}/>
+        //     <button onClick={() => {this.decreaseValue(index)}}className="btn">-</button>
+        //   </div>
+        )
+    }
+}
 
 class HeroService extends Component {
   state = {
@@ -49,8 +94,9 @@ class HeroService extends Component {
     squadName: "",
     homeTown: "",
     secretBase: "",
-    formed: ""
+    formed: "", 
   };
+
   componentDidMount() {
     this.squadInfo();
   }
@@ -67,21 +113,29 @@ class HeroService extends Component {
     });
   }
 
-  allHeros () {
-      const { heros } = this.state;
+  allHeros() {
+    const { heros } = this.state;
 
-      console.log("Heros: " + heros);
+    console.log("Heros: " + heros);
 
-      const herosList = heros.map((item, index ) => {
-          return (
-              <div className="row">
-                  <li key={item}>
-                        <p>{item.name + "/" + item.secretIdentity} || {"Super Powers: " + item.powers}</p>
-                  </li>
-              </div>
-          )
-      });
-      return <ul>{herosList}</ul>
+    const herosList = heros.map((item, index) => {
+      return (
+        <div className="row">
+          <div className="col-12">
+                <div className="card" key={item}>
+
+                  <div className="card-body">
+                    {item.name + "/" + item.secretIdentity} ||
+                    {"Super Powers: " + item.powers}
+                  </div>
+                  <Counter/>
+
+                </div>
+          </div>
+        </div>
+      );
+    });
+    return <ul>{herosList}</ul>;
   }
 
   render() {
@@ -97,7 +151,6 @@ class HeroService extends Component {
         <h2>{"Hometown:" + homeTown}</h2>
         <p>{"Secret Base: " + secretBase}</p>
         <p>{"Formed: " + formed}</p>
-
 
         <div id="renderGroup">{this.allHeros()}</div>
       </div>
