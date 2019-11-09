@@ -109,7 +109,7 @@ class Form extends Component {
       <div>
 
         {/* <Collapse> */}
-          <form>
+          {/* <form>
             <div className="form-group">
               <label htmlFor="name">Name</label>
               <input
@@ -177,7 +177,8 @@ class Form extends Component {
           </form>
         {/* </Collapse> */}
 
-        {this.state.formOpen ? <HeroService/> : null}
+        {/* {this.state.formOpen ? <HeroService/> : null} */} */}
+        <HeroService/>
       </div>
     );
   }
