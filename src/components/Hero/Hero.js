@@ -58,7 +58,7 @@ class HeroService extends Component {
   squadInfo() {
     json.heros().then(res => {
       this.setState({
-        heros: [...res.data.members, newHeros],
+        heros: [...res.data.members, ...newHeros],
         squadName: res.data.squadName,
         homeTown: res.data.homeTown,
         secretBase: res.data.secretBase,
@@ -67,10 +67,27 @@ class HeroService extends Component {
     });
   }
 
+  allHeros () {
+      const { heros } = this.state;
+
+      console.log("Heros: " + heros);
+
+      const herosList = heros.map((item, index ) => {
+          return (
+              <div className="row">
+                  <li key={item}>
+                      <p>{item.name}</p>
+                  </li>
+              </div>
+          )
+      });
+      return <ul>{herosList}</ul>
+  }
+
   render() {
     const { heros, squadName, homeTown, secretBase, formed } = this.state;
-    console.log("State: " + squadName);
-    console.log("Members: " + JSON.stringify(heros))
+    // console.log("State: " + squadName);
+    // console.log("Members: " + JSON.stringify(heros))
     // console.log("Members: " + heros.name)
     return (
       <div>
@@ -80,6 +97,9 @@ class HeroService extends Component {
         <h2>{"Hometown:" + homeTown}</h2>
         <p>{"Secret Base: " + secretBase}</p>
         <p>{"Formed: " + formed}</p>
+
+
+        <div id="renderGroup">{this.allHeros()}</div>
       </div>
     );
   }
