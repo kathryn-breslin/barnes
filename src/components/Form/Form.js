@@ -1,6 +1,5 @@
-import React, { Component, useState } from "react";
+import React, { Component } from "react";
 import HeroService from "../Hero/Hero";
-import { Collapse } from "react-bootstrap";
 import "./Form.css";
 
 
@@ -50,47 +49,52 @@ class Form extends Component {
     console.log("Email: " + email);
     console.log("Zip: " + zip);
 
+    //Unstable verification logic. 
+    //Determining if the 'name' input field has an index
     if (!name.length) {
       console.log("Please add your name");
       this.setState({ nameError: "Please add your name. Ex: 'Jane Doe'" });
     } else {
-      // this.setState({ nameError: "" });
-
       this.validated();
     }
+
+    //Determine if the input field for phone number
+    //has a length less than 7 and is a numeric value
     if (phoneNumber.length < 7 && isNaN) {
       console.log("Please enter a valid number.");
       this.setState({
         phoneError: "Please enter a valid number. Ex: 6101231234"
       });
     } else {
-      // this.setState({ phoneError: "" });
       this.validated();
     }
+
+    //Use regex to determine if email is valid. Throws an error if the user include a "." in part of their email
+    //Update to most current/accurate regex
     if (/^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[A-Za-z]+$/.test(email)) {
       console.log("Working email");
-      // this.setState({ emailError: "" });
       this.validated();
     } else {
+      //If this is not an email, throw an error
       console.log("Please add a valid email.");
       this.setState({
         emailError: "Please add a valid email. Ex: email@email.com"
       });
     }
+
+    //Determine if zipcode is more than 5 character and are only numeric values
     if (zip.length < 5 && isNaN) {
       console.log("Please add a valid zip.");
       this.setState({ zipError: "Please add valid zipcode. Ex: 19234" });
     } else {
-      // this.setState({ zipError: "" });
       this.validated();
     }
   };
-  // };
 
-  //Function to hide form on successful submittion of the form
+  //Function to validate form fields
+  //Will call Collapse form function if validated
   validated = () => {
     console.log("Form has been validated! Time to hide the form.");
-    // console.log("Name Error: " + nameError + " | Phone Error: " + phoneError)
     this.setState({ validated: true });
     if (this.state.validated) {
       this.setState({ formOpen: true });
@@ -101,6 +105,10 @@ class Form extends Component {
       console.log("Form has not been validated");
     }
   };
+
+  //Collapse form if validated
+  //Function will break if user clicks the "Edit Form button" that is rendered once collapsed - toggle state returned as undefined 
+  //Hero component causing the break?
 
   collapeForm () {
     this.setState({ toggle: !this.state.toggle })
@@ -114,7 +122,6 @@ class Form extends Component {
           <div className="card">
             <div className="card-header">Personal Information</div>
             <div className="card-body">
-              {/* <Collapse> */}
               {this.state.toggle ? (
                   <form>
                   <div className="form-group">
@@ -184,8 +191,6 @@ class Form extends Component {
                   </button>
                 </form>
               ) : <button className='btn' onClick={this.collapeForm}>Edit Form</button>}
-            
-              {/* </Collapse> */}
             </div>
           </div>
         </div>
