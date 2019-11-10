@@ -187,7 +187,8 @@ class Form extends Component {
                   </button>
                 </form>
               ) : (
-                <button className="btn" onClick={this.collapeForm}>
+                <button className="btn">
+                  {/* onClick={this.collapeForm} */}
                   Edit Form
                 </button>
               )}

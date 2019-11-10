@@ -39,7 +39,9 @@ class Counter extends Component {
     topTotal: 0
   };
 
-  increaseValue = () => {
+  increaseValue = (event) => {
+    event.preventDefault();
+
     this.setState(prevState => {
       if (prevState.total < 10) {
         return {
@@ -52,7 +54,9 @@ class Counter extends Component {
     this.calculateTotal();
   };
 
-  decreaseValue = () => {
+  decreaseValue = (event) => {
+    event.preventDefault();
+
     this.setState(prevState => {
       if (prevState.total > 0) {
         return {
@@ -82,6 +86,7 @@ class Counter extends Component {
   };
 
   handleEventChange = event => {
+    event.preventDefault();
     this.setState({ total: event.target.value });
   };
 
