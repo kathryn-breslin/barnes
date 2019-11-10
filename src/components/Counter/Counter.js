@@ -8,7 +8,7 @@ const Counter = props => {
         <button onClick={props.decreaseValue} className="btn btn-light">
           -
         </button>
-        <input className="input" value={props.total} onChange={props.handleChangeEvent} />
+        <input name="quantity" className="input" value={props.total} onChange={props.handleChangeEvent} />
         <button onClick={props.increaseValue} className="btn btn-light">
           +
         </button>

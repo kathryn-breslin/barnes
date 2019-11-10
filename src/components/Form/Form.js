@@ -67,8 +67,12 @@ class Form extends Component {
       this.validated();
     }
 
-    //Use regex to determine if email is valid. 
-    if (/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(email)) {
+    //Use regex to determine if email is valid.
+    if (
+      /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(
+        email
+      )
+    ) {
       console.log("Working email");
       this.validated();
     } else {
@@ -187,8 +191,8 @@ class Form extends Component {
                   </button>
                 </form>
               ) : (
-                <button className="btn">
-                  {/* onClick={this.collapeForm} */}
+                //onClick breaks with undefined state
+                <button className="btn" onClick={() => this.collapeForm()}>
                   Edit Form
                 </button>
               )}

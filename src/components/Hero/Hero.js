@@ -31,7 +31,7 @@ const newHeros = [
   }
 ];
 
-var checkout = 0;
+var checkout = [];
 
 class Counter extends Component {
   state = {
@@ -116,7 +116,7 @@ class HeroService extends Component {
     squadName: "",
     homeTown: "",
     secretBase: "",
-    formed: ""
+    formed: "", 
   };
 
   componentDidMount() {
@@ -142,6 +142,7 @@ class HeroService extends Component {
 
   allHeros() {
     const { heros } = this.state;
+
     const herosList = heros.map((item, index) => {
       const allPowers = item.powers.join(", ");
       return (
@@ -157,7 +158,9 @@ class HeroService extends Component {
             </div>
             <div className="col-5">
               <h5>{"Quantity"}</h5>
-              <Counter />
+              <Counter
+              id={index}
+              />
             </div>
           </div>
         </div>
@@ -188,8 +191,8 @@ class HeroService extends Component {
 
             <div id="renderGroup">
               {this.allHeros()}
-              <button className="btn btn-outline-light my-2 my-sm-0">
-                <Link to="/confirm"> Continue</Link>
+              <button className="btn btn-outline-light my-2 my-sm-0" onClick={this.handleFormSubmit}>Continue
+                {/* <Link to="/confirm"> Continue</Link> */}
               </button>
             </div>
           </div>
