@@ -165,17 +165,19 @@ class HeroService extends Component {
     // console.log("Members: " + heros.name)
     return (
       <div>
-        <h1>Hero Section!</h1>
-
-        <h1>{"Squad Name: " + squadName}</h1>
-        <h2>{"Hometown:" + homeTown}</h2>
-        <p>{"Secret Base: " + secretBase}</p>
-        <p>{"Formed: " + formed}</p>
+        <div className="card">
+          <div className="card-header">Hero Section</div>
+          <div className="card-body">
+            <h5 className="card-title">{"Squad Name: " + squadName}</h5>
+            <p className="card-text">{"Hometown:" + homeTown}</p>
+            <p className="card-text">{"Secret Base: " + secretBase}</p>
+            <p className="card-text">{"Formed: " + formed}</p>
+          </div>
+        </div>
 
         <div id="renderGroup">
           {this.allHeros()}
-          <button
-            className="btn btn-outline-light my-2 my-sm-0">
+          <button className="btn btn-outline-light my-2 my-sm-0">
             <Link to="/confirm"> Continue</Link>
           </button>
         </div>
