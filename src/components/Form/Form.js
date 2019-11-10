@@ -105,9 +105,8 @@ class Form extends Component {
   collapeForm () {
     this.setState({ toggle: !this.state.toggle })
   }
-  render() {
 
-    // const open = (this.state.toggle) ? "show" : "";
+  render() {
 
     return (
       <div>
@@ -184,7 +183,7 @@ class Form extends Component {
                     Continue
                   </button>
                 </form>
-              ) : ""}
+              ) : <button className='btn' onClick={this.collapeForm}>Edit Form</button>}
             
               {/* </Collapse> */}
             </div>
