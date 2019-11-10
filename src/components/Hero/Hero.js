@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import "./Hero.css";
 import json from "../../utils/json";
-import Card from "../Card/Card";
+import CardCounter from "../Counter/Counter";
 import { Link } from "react-router-dom";
 
 const newHeros = [
@@ -88,9 +88,9 @@ class Counter extends Component {
   render() {
     return (
       <div>
-        <div>Total: {this.calculateTotal()}</div>
+        <div>{this.calculateTotal()}</div>
 
-        <Card
+        <CardCounter
           total={this.state.total}
           increaseValue={this.increaseValue}
           decreaseValue={this.decreaseValue}
@@ -137,18 +137,21 @@ class HeroService extends Component {
 
   allHeros() {
     const { heros } = this.state;
-    // console.log("Heros: " + heros);
-
     const herosList = heros.map((item, index) => {
+      const allPowers = item.powers.join(", ");
       return (
-        <div className="row">
-          <div className="col-12">
-            <div className="card" key={item}>
-              <div className="card-body">
-                {item.name + "/" + item.secretIdentity} ||{" "}
-                {"Super Powers: " + item.powers}
-                {console.log("Index: " + index)}
-              </div>
+        <div className="card" key={item} id="superHeroCard">
+          <div className="row">
+            <div className="col-3">
+              <h5>{"Super Hero"}</h5>
+              <p>{item.name + "/" + item.secretIdentity}</p>
+            </div>
+            <div className="col-4">
+              <h5>{"Super Powers"}</h5>
+              <p>{allPowers}</p>
+            </div>
+            <div className="col-5">
+              <h5>{"Quantity"}</h5>
               <Counter />
             </div>
           </div>
@@ -159,27 +162,32 @@ class HeroService extends Component {
   }
 
   render() {
-    const { heros, squadName, homeTown, secretBase, formed } = this.state;
-    // console.log("State: " + squadName);
-    // console.log("Members: " + JSON.stringify(heros))
-    // console.log("Members: " + heros.name)
+    const { squadName, homeTown, secretBase, formed } = this.state;
     return (
       <div>
         <div className="card">
-          <div className="card-header">Hero Section</div>
+          <div className="card-header">Heroes</div>
           <div className="card-body">
-            <h5 className="card-title">{"Squad Name: " + squadName}</h5>
-            <p className="card-text">{"Hometown:" + homeTown}</p>
-            <p className="card-text">{"Secret Base: " + secretBase}</p>
-            <p className="card-text">{"Formed: " + formed}</p>
-          </div>
-        </div>
+            <h5 className="card-title" id="squadName">
+              {"Squad Name: " + squadName}
+            </h5>
+            <p className="card-text" id="homeTown">
+              {"Hometown: " + homeTown}
+            </p>
+            <p className="card-text" id="secretBase">
+              {"Secret Base: " + secretBase}
+            </p>
+            <p className="card-text" id="formed">
+              {"Formed: " + formed}
+            </p>
 
-        <div id="renderGroup">
-          {this.allHeros()}
-          <button className="btn btn-outline-light my-2 my-sm-0">
-            <Link to="/confirm"> Continue</Link>
-          </button>
+            <div id="renderGroup">
+              {this.allHeros()}
+              <button className="btn btn-outline-light my-2 my-sm-0">
+                <Link to="/confirm"> Continue</Link>
+              </button>
+            </div>
+          </div>
         </div>
       </div>
     );

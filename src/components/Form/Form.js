@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import HeroService from "../Hero/Hero";
 import "./Form.css";
 
-
 class Form extends Component {
   //Set the state for user input
   //Setting each as a string value to test; confirm best data-type for phone and zip
@@ -19,7 +18,6 @@ class Form extends Component {
     formOpen: false,
     toggle: true
   };
-
 
   //function to handle the event change when user types
   handleInputChange = event => {
@@ -49,7 +47,7 @@ class Form extends Component {
     console.log("Email: " + email);
     console.log("Zip: " + zip);
 
-    //Unstable verification logic. 
+    //Unstable verification logic.
     //Determining if the 'name' input field has an index
     if (!name.length) {
       console.log("Please add your name");
@@ -69,9 +67,8 @@ class Form extends Component {
       this.validated();
     }
 
-    //Use regex to determine if email is valid. Throws an error if the user include a "." in part of their email
-    //Update to most current/accurate regex
-    if (/^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[A-Za-z]+$/.test(email)) {
+    //Use regex to determine if email is valid. 
+    if (/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(email)) {
       console.log("Working email");
       this.validated();
     } else {
@@ -98,7 +95,7 @@ class Form extends Component {
     this.setState({ validated: true });
     if (this.state.validated) {
       this.setState({ formOpen: true });
-      this.collapeForm(); 
+      this.collapeForm();
       console.log("Form open state: " + this.state.formOpen);
       this.setState({ nameError: "", phoneError: "", emailError: "", zip: "" });
     } else {
@@ -107,23 +104,22 @@ class Form extends Component {
   };
 
   //Collapse form if validated
-  //Function will break if user clicks the "Edit Form button" that is rendered once collapsed - toggle state returned as undefined 
+  //Function will break if user clicks the "Edit Form button" that is rendered once collapsed - toggle state returned as undefined
   //Hero component causing the break?
 
-  collapeForm () {
-    this.setState({ toggle: !this.state.toggle })
+  collapeForm() {
+    this.setState({ toggle: !this.state.toggle });
   }
 
   render() {
-
     return (
       <div>
         <div className="container" id="form">
           <div className="card">
-            <div className="card-header">Personal Information</div>
+            <div className="card-header">Customer Form</div>
             <div className="card-body">
               {this.state.toggle ? (
-                  <form>
+                <form>
                   <div className="form-group">
                     <label htmlFor="name">Name</label>
                     <input
@@ -190,13 +186,17 @@ class Form extends Component {
                     Continue
                   </button>
                 </form>
-              ) : <button className='btn' onClick={this.collapeForm}>Edit Form</button>}
+              ) : (
+                <button className="btn" onClick={this.collapeForm}>
+                  Edit Form
+                </button>
+              )}
             </div>
           </div>
         </div>
         <div className="container" id="hero">
-            {this.state.formOpen ? <HeroService /> : null}
-          </div>
+          {this.state.formOpen ? <HeroService /> : null}
+        </div>
       </div>
     );
   }

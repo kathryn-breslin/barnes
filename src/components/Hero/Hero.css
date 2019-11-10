@@ -2,3 +2,12 @@
     text-align: left;
     margin: 20px;
 }
+
+#squadName, #homeTown, #secretBase, #formed {
+    text-align: center;
+}
+
+#superHeroCard {
+    margin: 20px;
+    padding: 30px;
+}
