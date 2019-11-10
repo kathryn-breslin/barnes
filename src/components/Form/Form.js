@@ -16,7 +16,8 @@ class Form extends Component {
     zipError: "",
     validated: false,
     formOpen: false,
-    toggle: true
+    toggle: true,
+    heroToggle: false
   };
 
   //function to handle the event change when user types
@@ -113,7 +114,18 @@ class Form extends Component {
 
   collapeForm() {
     this.setState({ toggle: !this.state.toggle });
+    this.setState({ herotoggle: !this.state.toggle });
+
   }
+
+  // openHero() {
+  //   if (this.state.formOpen && !this.state.heroToggle) {
+  //     console.log("Open hero!")
+  //     return (
+  //       <HeroService/>
+  //     )
+  //   }
+  // }
 
   render() {
     return (
@@ -199,9 +211,19 @@ class Form extends Component {
             </div>
           </div>
         </div>
+        {/* <div className="card">
+          <div className="card-header">Heroes</div>
+        {this.state.heroToggle ? ( */}
         <div className="container" id="hero">
-          {this.state.formOpen ? <HeroService /> : null}
-        </div>
+          {/* {this.openHero()} */}
+        {this.state.formOpen ? <HeroService /> : null}
+      </div>
+        {/* // ): (
+        //   <button className="btn" onClick={() => this.collapeForm()}>
+        //   Edit Hero
+        // </button>
+        // )} 
+        // </div> */}
       </div>
     );
   }
