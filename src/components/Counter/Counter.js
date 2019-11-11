@@ -3,12 +3,12 @@ import "./Counter.css";
 
 const Counter = props => {
   return (
-    <form className="form-inline">
-      <div className="form-group mx-sm-3 mb-2">
+    <form className="form">
+      <div className="form-inline">
         <button onClick={props.decreaseValue} className="btn btn-light">
           -
         </button>
-        <input name="quantity" className="input" value={props.total} onChange={props.handleChangeEvent} />
+        <input className="form-control input" name="quantity" value={props.total} onChange={props.handleChangeEvent} />
         <button onClick={props.increaseValue} className="btn btn-light">
           +
         </button>
