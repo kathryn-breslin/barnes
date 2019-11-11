@@ -115,7 +115,6 @@ class Form extends Component {
   collapeForm() {
     this.setState({ toggle: !this.state.toggle });
     this.setState({ herotoggle: !this.state.toggle });
-
   }
 
   // openHero() {
@@ -216,8 +215,8 @@ class Form extends Component {
         {this.state.heroToggle ? ( */}
         <div className="container" id="hero">
           {/* {this.openHero()} */}
-        {this.state.formOpen ? <HeroService /> : null}
-      </div>
+          {this.state.formOpen ? <HeroService /> : null}
+        </div>
         {/* // ): (
         //   <button className="btn" onClick={() => this.collapeForm()}>
         //   Edit Hero

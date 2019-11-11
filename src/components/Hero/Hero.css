@@ -11,3 +11,8 @@
     margin: 20px;
     padding: 30px;
 }
+
+#totalDiv, #confirmButton {
+    text-align: right;
+    margin: 20px;
+}

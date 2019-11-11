@@ -31,7 +31,7 @@ const newHeros = [
   }
 ];
 
-var checkout = [];
+let checkout = 0;
 
 class Counter extends Component {
   state = {
@@ -39,44 +39,54 @@ class Counter extends Component {
     topTotal: 0
   };
 
-  increaseValue = (event) => {
+  increaseValue = event => {
+    event.preventDefault();
     event.preventDefault();
 
-    this.setState(prevState => {
-      if (prevState.total < 10) {
-        return {
-          total: prevState.total + 1
-        };
-      } else {
-        return null;
+    this.setState(
+      prevState => {
+        if (prevState.total < 10) {
+          return {
+            total: prevState.total + 1
+          };
+        } else {
+          return null;
+        }
+      },
+      () => {
+        this.calculateTotal();
       }
-    });
-    this.calculateTotal();
+    );
   };
 
-  decreaseValue = (event) => {
+  decreaseValue = event => {
     event.preventDefault();
 
-    this.setState(prevState => {
-      if (prevState.total > 0) {
-        return {
-          total: prevState.total - 1
-        };
-      } else {
-        return null;
+    this.setState(
+      prevState => {
+        if (prevState.total > 0) {
+          return {
+            total: prevState.total - 1
+          };
+        } else {
+          return null;
+        }
+      },
+      () => {
+        this.calculateTotal();
       }
-    });
-    this.calculateTotal();
+    );
   };
 
   calculateTotal() {
-    // checkout += this.state.total
-    //  console.log("Checkout: " + this.state.total)
+    checkout = this.state.total;
+    console.log("Checkout: " + checkout);
     const { total, topTotal } = this.state;
-    let currentTotal = 0;
-    currentTotal += total;
+    // let currentTotal = 0;
+    // currentTotal += total;
     // this.setState({ topTotal: currentTotal})
-    console.log("Current Total: " + currentTotal);
+    this.Total(checkout);
+    console.log("Current Total: " + total);
   }
 
   handleClick = () => {
@@ -93,7 +103,7 @@ class Counter extends Component {
   render() {
     return (
       <div>
-        <div>{this.calculateTotal()}</div>
+        {/* <div>{this.calculateTotal()}</div> */}
 
         <CardCounter
           total={this.state.total}
@@ -116,7 +126,7 @@ class HeroService extends Component {
     squadName: "",
     homeTown: "",
     secretBase: "",
-    formed: "", 
+    formed: ""
   };
 
   componentDidMount() {
@@ -158,9 +168,7 @@ class HeroService extends Component {
             </div>
             <div className="col-5">
               <h5>{"Quantity"}</h5>
-              <Counter
-              id={index}
-              />
+              <Counter id={index} />
             </div>
           </div>
         </div>
@@ -191,9 +199,26 @@ class HeroService extends Component {
 
             <div id="renderGroup">
               {this.allHeros()}
-              <button className="btn btn-outline-light my-2 my-sm-0" onClick={this.handleFormSubmit}>Continue
-                {/* <Link to="/confirm"> Continue</Link> */}
-              </button>
+
+              <div className="container">
+                <div className="row">
+                  <div className="col-12">
+                    <h1 id="totalDiv">Total: {checkout}</h1>
+                  </div>
+                </div>
+                <div className="row">
+                  <div className="col-12" id="confirmButton">
+                    <button
+                      className="btn btn-outline-light my-2 my-sm-0"
+                      onClick={this.handleFormSubmit}
+                    >
+                      <Link 
+                      style={{ textDecoration: "none"}}
+                      to="/confirm"> Continue</Link>
+                    </button>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
