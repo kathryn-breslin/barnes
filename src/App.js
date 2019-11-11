@@ -5,6 +5,10 @@ import Confirmation from "../src/pages/Confirmation/Confirmation"
 import Form from "../src/components/Form/Form";
 
 function App() {
+
+  //Installed React-Router to control routes
+  //I structure those routes here
+  //In the future I would need to make these routes controlled so that the user cannot click through the 'Confirmation page' without having atleast 1 hero quantity in the HeroService component
   return (
     <Router>
       <div>
@@ -12,15 +16,6 @@ function App() {
         <Route exact path="/confirm" component={Confirmation}/>
       </div>
     </Router>
-    // <div className="App">
-    //   <div className="container">
-    //     <div className="row">
-    //       <div className="col-12">
-    //         <Form />
-    //       </div>
-    //     </div>
-    //   </div>
-    // </div>
   );
 }
 

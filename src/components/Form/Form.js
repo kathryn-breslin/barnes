@@ -109,13 +109,14 @@ class Form extends Component {
   };
 
   //Collapse form if validated
-  //Function will break if user clicks the "Edit Form button" that is rendered once collapsed - toggle state returned as undefined
-  //Hero component causing the break?
-
   collapeForm() {
     this.setState({ toggle: !this.state.toggle });
     this.setState({ herotoggle: !this.state.toggle });
   }
+
+  // I considered writing a separate function instead of a ternary operator to control the toggle (seen below). I have left it commented out below
+  // I decided to use the ternary operator for to toggle the Form component. I have left a separate ternary condition on line 224 commented out. This would be the my next step in terms of rendering the Hero Component
+
 
   // openHero() {
   //   if (this.state.formOpen && !this.state.heroToggle) {
@@ -210,11 +211,15 @@ class Form extends Component {
             </div>
           </div>
         </div>
+
+        {/* Incorporate a toggle for the hero page. */}
+        {/* If I were to uncomment this statement the toggle between the Form and Hero components work; however, the data in the Hero component does not render. */}
+        {/* I considered writing a separate function to control the toggle (seen above). */}
+
         {/* <div className="card">
           <div className="card-header">Heroes</div>
         {this.state.heroToggle ? ( */}
         <div className="container" id="hero">
-          {/* {this.openHero()} */}
           {this.state.formOpen ? <HeroService /> : null}
         </div>
         {/* // ): (

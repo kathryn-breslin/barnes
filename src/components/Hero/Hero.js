@@ -4,6 +4,7 @@ import json from "../../utils/json";
 import CardCounter from "../Counter/Counter";
 import { Link } from "react-router-dom";
 
+//Array of objects to expand to the superheros JSON endpoint
 const newHeros = [
   {
     name: "Melinda Gates",
@@ -33,12 +34,16 @@ const newHeros = [
 
 let checkout = 0;
 
+// Create Counter class to manage individual counter's state for each superhero. Superheros are mapped in HeroService class (see below)
 class Counter extends Component {
+
+  //Structure state for "total"  -- the value being tracked by the counter
   state = {
     total: 0,
     topTotal: 0
   };
 
+  //increaseValue function increased the Total state when user clicks the " + "  button
   increaseValue = event => {
     event.preventDefault();
     event.preventDefault();
@@ -59,6 +64,7 @@ class Counter extends Component {
     );
   };
 
+//decreaseValue function lessens the Total state when user clicks the " - "  button
   decreaseValue = event => {
     event.preventDefault();
 
@@ -78,6 +84,9 @@ class Counter extends Component {
     );
   };
 
+  //Attempt at calculating the total
+  // My hope was to create a separate value to mirror the Total state
+  // When the user increases/decreases another superhero the Total state returns to zero for that hero
   calculateTotal() {
     checkout = this.state.total;
     console.log("Checkout: " + checkout);
@@ -85,16 +94,10 @@ class Counter extends Component {
     // let currentTotal = 0;
     // currentTotal += total;
     // this.setState({ topTotal: currentTotal})
-    this.Total(checkout);
     console.log("Current Total: " + total);
   }
 
-  handleClick = () => {
-    this.setState({
-      showNumber: !this.state.showNumber
-    });
-  };
-
+//This function renders the value inside the counter. Value begins at 0 and increases/decreases along with the user clicks. Tracks the event change
   handleEventChange = event => {
     event.preventDefault();
     this.setState({ total: event.target.value });
@@ -103,23 +106,17 @@ class Counter extends Component {
   render() {
     return (
       <div>
-        {/* <div>{this.calculateTotal()}</div> */}
-
         <CardCounter
           total={this.state.total}
           increaseValue={this.increaseValue}
           decreaseValue={this.decreaseValue}
         />
-        {/* //     <div className="col-auto">
-      //     <button onClick={() => {this.increaseValue(index)}}className="btn">+</button>
-      //     <input value={this.state.total} onChange={() => this.handleEventChange(index)}/>
-      //     <button onClick={() => {this.decreaseValue(index)}}className="btn">-</button>
-      //   </div> */}
       </div>
     );
   }
 }
 
+// Hero service component to manage the state of each superhero
 class HeroService extends Component {
   state = {
     heros: [],
@@ -133,6 +130,10 @@ class HeroService extends Component {
     this.squadInfo();
   }
 
+//This function calls the "API" of JSON data at https://mdn.github.io/learning-area/javascript/oojs/json/superheroes.json
+//I make an axios call inside of the "utils" folder that gets this data
+//This is the function that return the response
+//I have used the spread operator to include my array of heros to the data that is being returned by the axios call
   squadInfo() {
     json.heros().then(res => {
       this.setState({
@@ -145,11 +146,14 @@ class HeroService extends Component {
     });
   }
 
+  //This is where I would have liked managed the data of each of the superhero quantities and powers
+  //I would have handled this submission similarly to how I received the form data/data from the Form component
   handleFormSubmit = event => {
     event.preventDefault();
     console.log("Submit!");
   };
 
+  //This function maps the Hero state and structures the data before being returned
   allHeros() {
     const { heros } = this.state;
 
@@ -198,6 +202,7 @@ class HeroService extends Component {
             </p>
 
             <div id="renderGroup">
+              {/* allHeros function rendered here */}
               {this.allHeros()}
 
               <div className="container">
@@ -212,9 +217,14 @@ class HeroService extends Component {
                       className="btn btn-outline-dark my-2 my-sm-0"
                       onClick={this.handleFormSubmit}
                     >
-                      <Link 
-                      style={{ textDecoration: "none"}}
-                      to="/confirm"> Continue</Link>
+                    {/* I use React-Router to control routing. I have declared the paths in App.js */}
+                      <Link
+                        style={{ textDecoration: "none", color: "#343A40" }}
+                        to="/confirm"
+                      >
+                        {" "}
+                        Continue
+                      </Link>
                     </button>
                   </div>
                 </div>
