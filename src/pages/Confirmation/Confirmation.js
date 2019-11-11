@@ -1,6 +1,11 @@
 import React, { Component } from "react";
 import "./Confirmation.css";
 
+//My next step would be to send the state object of user information and superhero information to this page
+//I would render this data similarly to how that of the data on the Hero component
+
+//I would then create a button at the bottom of this container that would ultimately take the user to the next page (as outlined in the instructions)
+//This button would only be clickable/shown if the user has chosen at least one Hero quantity
 class Confirmation extends Component {
   render() {
     return (

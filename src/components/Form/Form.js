@@ -30,6 +30,7 @@ class Form extends Component {
 
   //form to capture user input on submit
   //NEXT: add validation for each field
+  //This function is a bit buggy. The user has to click the submit button twice before the form is validated
   handleFormSubmit = event => {
     event.preventDefault();
     console.log("Submit has been clicked!");
@@ -48,7 +49,6 @@ class Form extends Component {
     console.log("Email: " + email);
     console.log("Zip: " + zip);
 
-    //Unstable verification logic.
     //Determining if the 'name' input field has an index
     if (!name.length) {
       console.log("Please add your name");
@@ -159,7 +159,7 @@ class Form extends Component {
                       }`}
                       id="phoneNumber"
                       name="phoneNumber"
-                      placeholder="(610) 898-3456"
+                      placeholder="6108983456"
                       onChange={this.handleInputChange}
                     />
                     <div className="invalid">{this.state.phoneError}</div>
