@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import "./Confirmation.css";
 
 class Confirmation extends Component {
   render() {
@@ -15,18 +16,52 @@ class Confirmation extends Component {
                 <p className="card-text">Email: </p>
                 <p className="card-text">Zip: </p>
               </div>
-            <div className="col-4">
-              <h5 className="card-title">Total Heros</h5>
-              <p className="card-text"><h1>0</h1></p>
-            </div>
-            <div className="col-4">
-              <h5 className="card-title">Total Powers</h5>
-              <p className="card-text"><h1>0</h1></p>
-            </div>
+              <div className="col-4">
+                <h5 className="card-title">Total Heros</h5>
+                <p className="card-text">
+                  <h1>0</h1>
+                </p>
+              </div>
+              <div className="col-4">
+                <h5 className="card-title">Total Powers</h5>
+                <p className="card-text">
+                  <h1>0</h1>
+                </p>
+              </div>
+            </div>  
+          </div>
+        </div>
+
+        <div className="card">
+          <div className="card-header">Search By Power</div>
+          <div className="card-body">
+            <div className="row">
+              <div className="col-12" id="searchForm">
+              <form class="form-inline justify-content-end">
+                  <div className="form-group mx-sm-3 mb-2">
+                    <label for="searchByPower" className="sr-only">
+                      Password
+                    </label>
+                    <input
+                      type="text"
+                      className="form-control"
+                      id="searchByPower"
+                      placeholder="Search by Power"
+                    />
+                  </div>
+                  <button
+                    id="searchByPowerButton"
+                    className="btn btn-outline-dark mb-2"
+                  >
+                    Search
+                  </button>
+                </form>
+              </div>
             </div>
           </div>
         </div>
       </div>
+      
     );
   }
 }

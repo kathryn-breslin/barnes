@@ -209,7 +209,7 @@ class HeroService extends Component {
                 <div className="row">
                   <div className="col-12" id="confirmButton">
                     <button
-                      className="btn btn-outline-light my-2 my-sm-0"
+                      className="btn btn-outline-dark my-2 my-sm-0"
                       onClick={this.handleFormSubmit}
                     >
                       <Link 
